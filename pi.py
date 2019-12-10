@@ -20,6 +20,7 @@ from __future__ import print_function
 import sys
 from random import random
 from operator import add
+from pygenetic import ChromosomeFactory
 
 from pyspark.sql import SparkSession
 
@@ -44,4 +45,9 @@ if __name__ == "__main__":
     count = spark.sparkContext.parallelize(range(1, n + 1), partitions).map(f).reduce(add)
     print("Pi is roughly %f" % (4.0 * count / n))
 
+    factory = ChromosomeFactory.ChromosomeRangeFactory(minValue=1,
+                        maxValue=100,noOfGenes=8,duplicates=False)
+    factory.createChromosome()
+    
     spark.stop()
+    
