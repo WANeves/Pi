@@ -45,9 +45,9 @@ if __name__ == "__main__":
     
     factory = ChromosomeFactory.ChromosomeRangeFactory(minValue=1,
                         maxValue=100,noOfGenes=8,duplicates=False)
-    factory.createChromosome()
     
-    print("Chromosome")
+    
+    print(factory.createChromosome())
     
     count = spark.sparkContext.parallelize(range(1, n + 1), partitions).map(f).reduce(add)
     print("TESTE DE Pi is roughly %f" % (4.0 * count / n))
