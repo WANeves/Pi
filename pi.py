@@ -49,5 +49,7 @@ if __name__ == "__main__":
                         maxValue=100,noOfGenes=8,duplicates=False)
     factory.createChromosome()
     
+    print("Chromosome")
+    
     spark.stop()
     
