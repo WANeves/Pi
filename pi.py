@@ -20,7 +20,7 @@ from __future__ import print_function
 import sys
 from random import random
 from operator import add
-from pygenetic import ChromosomeFactory
+from pygenetic import SimpleGA
 
 from pyspark.sql import SparkSession
 
@@ -43,12 +43,14 @@ if __name__ == "__main__":
         return 1 if x ** 2 + y ** 2 <= 1 else 0
 
     
-    factory = ChromosomeFactory.ChromosomeRangeFactory(minValue=1,
-                        maxValue=100,noOfGenes=8,duplicates=False)
     
+    ga = SimpleGA.SimpleGA(minValue=1,maxValue=120,
+                      noOfGenes=20,fitness_func=lambda x:sum(x),
+                      duplicates=False,population_size=1000,
+                      fitness_type='max')
     
-    print(factory.createChromosome())
-    
+    print(ga.evolve(10))
+   
     count = spark.sparkContext.parallelize(range(1, n + 1), partitions).map(f).reduce(add)
     print("TESTE DE Pi is roughly %f" % (4.0 * count / n))
 
